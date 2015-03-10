@@ -4,23 +4,29 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.Session;
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import de.koehler.money.entity.Account;
 import de.koehler.money.entity.Currency;
 import de.koehler.money.entity.Transaction;
+import de.koehler.money.entity.queries.AccountQueries;
 
 /**
  * 
- *@author matthias
+ * @author Matthias Köhler
  */
 public class App {
+	
+	
 	public static void main(String[] args) {
-		Session session = HibernateUtil.getSessionFactory().openSession();
+		
+		// 1. create connection...
+		EntityManager entityManager = Persistence.createEntityManagerFactory("mysql").createEntityManager();
+		entityManager.getTransaction().begin();
 
-		session.beginTransaction();
-
+		// 2. setup testdata...
 		Currency currency = new Currency();
 		currency.setName("Euronen");
 		currency.setIsoCode("EUR");
@@ -36,18 +42,21 @@ public class App {
 		transaction1.setDate(new Date(System.currentTimeMillis()));		
 		account.getTransactions().add(transaction1);
 		
-		session.save(currency);
-		session.save(transaction1);
-		session.save(account);
-
-		session.getTransaction().commit();
-
-		Query q = session.createQuery("From Account ");
-
-		List<Account> resultList = q.list();
-		System.out.println("num of employess:" + resultList.size());
+		// 3. persist testdata...
+		entityManager.persist(currency);
+		entityManager.persist(transaction1);
+		entityManager.persist(account);
+		entityManager.getTransaction().commit();
+		
+		// 4. query testdata...
+		TypedQuery<Account> query = entityManager.createNamedQuery(AccountQueries.FIND_ALL, Account.class);
+		List<Account> resultList = query.getResultList();
+		entityManager.close();
+		
+		// 5. print result...
+		System.out.println("Number of accounts: " + resultList.size());
 		for (Account next : resultList) {
-			System.out.println("next employee: " + next);
+			System.out.println(next);
 		}
 	}
 }

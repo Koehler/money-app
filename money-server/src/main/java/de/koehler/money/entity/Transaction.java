@@ -12,6 +12,10 @@ import javax.persistence.Table;
 
 import lombok.Data;
 
+/**
+ * 
+ * @author Matthias Köhler
+ */
 @Entity
 @Table
 public @Data class Transaction {
