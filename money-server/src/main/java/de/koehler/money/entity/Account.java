@@ -22,9 +22,9 @@ import de.koehler.money.entity.queries.AccountQueries;
  */
 //@formatter:off
 @NamedQueries({ 
-	@NamedQuery(name = AccountQueries.FIND_ALL, query = "SELECT account FROM Account account"),
-	@NamedQuery(name = AccountQueries.FIND_BY_NAME, query = "SELECT account FROM Account account WHERE account.name = :name"),
-	@NamedQuery(name = AccountQueries.FIND_BY_ID, query = "SELECT account FROM Account account WHERE account.id = :id")
+	@NamedQuery(name = AccountQueries.FIND_ALL, query = "SELECT a FROM Account a"),
+	@NamedQuery(name = AccountQueries.FIND_BY_NAME, query = "SELECT a FROM Account a WHERE a.name = :name"),
+	@NamedQuery(name = AccountQueries.FIND_BY_ID, query = "SELECT a FROM Account a WHERE a.id = :id")
 })
 //@formatter:on
 @Entity
