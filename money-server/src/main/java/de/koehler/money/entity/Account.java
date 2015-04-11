@@ -14,6 +14,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Data;
+
+import com.google.gson.annotations.Expose;
+
 import de.koehler.money.entity.queries.AccountQueries;
 
 /**
@@ -35,6 +38,7 @@ public @Data class Account implements AccountQueries {
 	@GeneratedValue
 	private Long id;
 
+	@Expose
 	@Column(name = "name")
 	private String name;
 
@@ -43,5 +47,10 @@ public @Data class Account implements AccountQueries {
 
 	@OneToMany(mappedBy = "account")
 	private List<Transaction> transactions = new ArrayList<>();
+
+	@Override
+	public String toString() {
+		return "Account [name=" + name + ", currency=" + currency + "]";
+	}
 
 }

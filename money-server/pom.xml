@@ -5,7 +5,7 @@
 	<groupId>de.koehler</groupId>
 	<artifactId>money-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 
 	<name>money-server</name>
 	<url>http://maven.apache.org</url>
@@ -75,7 +75,7 @@
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 			<version>1.0.0.GA</version>
-			<scope>provided</scope>
+			<!-- <scope>provided</scope> -->
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -117,6 +117,34 @@
 			<artifactId>flyway-core</artifactId>
 			<version>2.3.1</version>
 		</dependency>
+		
+		<!-- JAX-RS 2.0 -->
+		<!-- servlet 3.0 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<!-- jax-rs 2.0 -->
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0</version>
+		</dependency>
+		<!-- jersey implementation library -->
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>2.11</version>
+		</dependency>
+
+		<!-- for Helper to generate JSON -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.7.1</version>
+		</dependency>		
 
 	</dependencies>
 </project>
